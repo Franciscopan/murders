@@ -1,0 +1,32 @@
+---
+title: "Criminalidad"
+author: "FPM"
+date: "25/10/2020"
+output:
+  word_document: default
+  html_document: default
+  github_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r ,echo=FALSE}
+load("rda/murders.rda")
+```
+```{r, echo=FALSE}
+require(tidyverse)
+```
+
+## Tasa de criminalidad por estado
+Se va a comprobar la variabilidad de la tasa de criminalidad por estado en función de su tamaño generando u gráfico de barras con los estado y las tasa de criminalidad
+```{r tasa-de-criminalidad-por estado,echo=FALSE}
+murders
+murders%>%
+  mutate(abb=reorder(abb,rate))%>%
+  ggplot(aes(abb,rate))+
+  geom_bar(width = 0.5,stat = "identity",color="blue")+
+  coord_flip()
+```
